@@ -40,6 +40,8 @@ size of first heatmap}
 
 \item{type}{scatter or bar?}
 
+\item{FUNC}{function to use for the column summary}
+
 \item{...}{additional arguments to \code{\link{add_col_plot}} or 
 \code{\link{add_col_barplot}}}
 }

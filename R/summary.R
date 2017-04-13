@@ -17,6 +17,7 @@
 #' @param xname internal name of xaxis
 #' @param yname internal name of yaxis
 #' @param type scatter or bar?
+#' @param FUNC function to use for the row summary
 #' @param ... additional arguments to \code{\link{add_row_plot}} or 
 #' \code{\link{add_row_barplot}}
 #' 
@@ -67,6 +68,7 @@ setMethod(add_row_summary, c(p = "Iheatmap"),
                    xname = NULL,
                    yname = current_yaxis(p),
                    type = c("scatter","bar"),
+          		   FUNC = rowMeans,
                    ...){
             
             side <- match.arg(side)
@@ -93,7 +95,7 @@ setMethod(add_row_summary, c(p = "Iheatmap"),
             mat <- get_data(hm)
             
             row_summary_without_groups <- function(p){
-              x <- rowMeans(mat, na.rm = TRUE)
+              x <- apply(mat, 1, FUNC, na.rm=TRUE)
               p <- if (type == "scatter"){
                 add_row_plot(p,
                                 x = x, 
@@ -125,7 +127,7 @@ setMethod(add_row_summary, c(p = "Iheatmap"),
             row_summary_with_groups <- function(p, groups, colors){
               for (i in seq_along(levels(groups))){
                 sel <- which(groups == levels(groups)[i])
-                x <- rowMeans(mat[,sel,drop = FALSE],na.rm=TRUE)
+                x <- apply(mat[,sel,drop = FALSE], 1, FUNC, na.rm=TRUE)
                 p <- if (type == "scatter"){
                   add_row_plot(p,
                                   x = x, color = colors[i], 
@@ -214,6 +216,7 @@ setMethod(add_row_summary, c(p = "Iheatmap"),
 #' @param xname internal name of xaxis
 #' @param yname internal name of yaxis
 #' @param type scatter or bar?
+#' @param FUNC function to use for the column summary
 #' @param ... additional arguments to \code{\link{add_col_plot}} or 
 #' \code{\link{add_col_barplot}}
 #' 
@@ -264,6 +267,7 @@ setMethod(add_col_summary, c(p = "Iheatmap"),
                    xname = current_xaxis(p),
                    yname = NULL,
                    type = c("scatter","bar"),
+          		   FUNC = colMeans,
                    ...){
             
             side <- match.arg(side)
@@ -290,7 +294,7 @@ setMethod(add_col_summary, c(p = "Iheatmap"),
             mat <- get_data(hm)
             
             col_summary_without_groups <- function(p){
-              y <- colMeans(mat, na.rm = TRUE)
+              y <- apply(mat, 2, FUNC, na.rm=TRUE)
               
               p <- if (type == "scatter"){
                 add_col_plot(p,
@@ -323,7 +327,7 @@ setMethod(add_col_summary, c(p = "Iheatmap"),
             col_summary_with_groups <- function(p, groups, colors){
               for (i in seq_along(levels(groups))){
                 sel <- which(groups == levels(groups)[i])
-                y <- colMeans(mat[sel,,drop = FALSE],na.rm=TRUE)
+                y <- apply(mat[sel,,drop = FALSE], 2, FUNC, na.rm=TRUE)
                 p <- if (type == "scatter"){
                   add_col_plot(p,
                                   y = y, 

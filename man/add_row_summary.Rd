@@ -41,6 +41,8 @@ size of first heatmap}
 
 \item{type}{scatter or bar?}
 
+\item{FUNC}{function to use for the row summary}
+
 \item{...}{additional arguments to \code{\link{add_row_plot}} or 
 \code{\link{add_row_barplot}}}
 }
