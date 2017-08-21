@@ -275,7 +275,7 @@ setMethod(add_col_summary, c(p = "Iheatmap"),
                    xname = current_xaxis(p),
                    yname = NULL,
                    type = c("scatter","bar"),
-                   summary_function = c("mean","median","sd","var","mad","max","min"),
+                   summary_function = c("mean","median","sd","var","mad","max","min", "sum_if_gt_zero"),
                    ...){
             
             side <- match.arg(side)
