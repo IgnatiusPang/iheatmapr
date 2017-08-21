@@ -72,6 +72,11 @@ setMethod(add_row_summary, c(p = "Iheatmap"),
                    summary_function = c("mean","median","sd","var","mad","max","min", "sum_if_gt_zero"),
                    ...){
             
+          	### Function to count samples with counts greater than zero
+          	sum_if_gt_zero <- function(x,...){ return(sum(ifelse(x>0,1,0))) }
+          	
+          	
+          	
             side <- match.arg(side)
             type <- match.arg(type)
             summary_function <- match.arg(summary_function)
