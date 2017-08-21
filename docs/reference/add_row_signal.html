@@ -23,9 +23,10 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -51,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../articles/iheatmapr.html">Vignette</a>
+  <a href="../articles/full_vignettes/iheatmapr.html">Vignette</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,7 +61,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/AliciaSchep/iheatmapr">
+  <a href="https://github.com/ropensci/iheatmapr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -83,13 +84,14 @@
     <p>Adds single column heatmap to iheatmap object</p>
     
 
-    <pre><span class='co'># S4 method for Iheatmap</span>
+    <pre class="usage"><span class='co'># S4 method for Iheatmap</span>
 <span class='fu'>add_row_signal</span>(<span class='no'>p</span>, <span class='no'>signal</span>, <span class='no'>name</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='no'>name</span>,
   <span class='kw'>xname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>yname</span> <span class='kw'>=</span> <span class='fu'>current_yaxis</span>(<span class='no'>p</span>), <span class='kw'>pname</span> <span class='kw'>=</span> <span class='no'>name</span>,
   <span class='kw'>colorbar_position</span> <span class='kw'>=</span> <span class='fu'>get_colorbar_position</span>(<span class='no'>p</span>),
   <span class='kw'>colors</span> <span class='kw'>=</span> <span class='fu'>pick_continuous_colors</span>(<span class='no'>zmid</span>, <span class='no'>zmin</span>, <span class='no'>zmax</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='no'>p</span>),
   <span class='kw'>zmin</span> <span class='kw'>=</span> <span class='fu'>min</span>(<span class='no'>signal</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>zmax</span> <span class='kw'>=</span> <span class='fu'>max</span>(<span class='no'>signal</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
   <span class='kw'>zmid</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>side</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"right"</span>, <span class='st'>"left"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>buffer</span> <span class='kw'>=</span> <span class='fl'>0.015</span>,
+  <span class='kw'>text</span> <span class='kw'>=</span> <span class='fu'>signif</span>(<span class='no'>signal</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>), <span class='kw'>tooltip</span> <span class='kw'>=</span> <span class='fu'><a href='setup_tooltip_options.html'>setup_tooltip_options</a></span>(),
   <span class='kw'>show_colorbar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -157,6 +159,14 @@
 size of first heatmap</p></td>
     </tr>
     <tr>
+      <th>text</th>
+      <td><p>text of value to display for data</p></td>
+    </tr>
+    <tr>
+      <th>tooltip</th>
+      <td><p>tooltip options, see <code><a href='setup_tooltip_options.html'>setup_tooltip_options</a></code></p></td>
+    </tr>
+    <tr>
       <th>show_colorbar</th>
       <td><p>show the colorbar?</p></td>
     </tr>
@@ -172,13 +182,12 @@ size of first heatmap</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>Iheatmap-class</code> object, which can be printed to generate 
+    <p><code><a href='Iheatmap-class.html'>Iheatmap-class</a></code> object, which can be printed to generate 
 an interactive graphic</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='iheatmap.html'>iheatmap</a></code>, <code><a href='as_plotly.html'>as_plotly</a></code>, 
-<code><a href='add_col_groups.html'>add_col_groups</a></code>
+    <p><code><a href='iheatmap.html'>iheatmap</a></code>, <code><a href='add_col_groups.html'>add_col_groups</a></code>
     <code><a href='add_col_signal.html'>add_col_signal</a></code>, <code><a href='iheatmap.html'>iheatmap</a></code>, 
 <code><a href='add_row_annotation.html'>add_row_annotation</a></code></p>
     
@@ -189,7 +198,7 @@ an interactive graphic</p>
 <span class='no'>hm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='iheatmap.html'>iheatmap</a></span>(<span class='no'>mat</span>) <span class='kw'>%&gt;%</span> <span class='fu'>add_row_signal</span>(<span class='kw'>signal</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Strength"</span>)
 
 <span class='co'># Print heatmap if interactive session </span>
-<span class='kw'>if</span> (<span class='fu'>interactive</span>()) <span class='no'>hm</span></div></pre>
+<span class='kw'>if</span> (<span class='fu'>interactive</span>()) <span class='no'>hm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: file("") only supports open = "w+" and open = "w+b": using the former</span></div><div class='output co'>#&gt; <span class='error'>Error in dirname(to): a character vector argument expected</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

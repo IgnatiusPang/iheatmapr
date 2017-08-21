@@ -23,9 +23,10 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -51,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../articles/iheatmapr.html">Vignette</a>
+  <a href="../articles/full_vignettes/iheatmapr.html">Vignette</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,7 +61,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/AliciaSchep/iheatmapr">
+  <a href="https://github.com/ropensci/iheatmapr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -81,9 +82,23 @@
     </div>
 
     <div class="contents">
+    <div id="iheatmapr-0-4-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#iheatmapr-0-4-0" class="anchor"></a>iheatmapr 0.4.0</h1>
+<ul>
+<li>Added option to customize text in tooltips for heatmaps. By default, only show three sig figs for values. This change will break rendering of Iheatmap objects created via older versions of iheatmapr.</li>
+</ul>
+</div>
+    <div id="iheatmapr-0-3-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#iheatmapr-0-3-0" class="anchor"></a>iheatmapr 0.3.0</h1>
+<ul>
+<li>Removed plotly r package dependency. iheatmapr now directly interfaces with plotlyjs instead. While this may mean having two copies of the plotly.js library, the benefit is that the htmlwidget for iheatmapr can be customized for plots created by iheatmapr and that iheatmapr now has more control over when the js component gets updated.</li>
+</ul>
+</div>
     <div id="iheatmapr-0-2-1" class="section level1">
 <h1 class="hasAnchor">
-<a href="#iheatmapr-0-2-1" class="anchor"> </a>iheatmapr 0.2.1</h1>
+<a href="#iheatmapr-0-2-1" class="anchor"></a>iheatmapr 0.2.1</h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul>
@@ -95,6 +110,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#iheatmapr-0-4-0">0.4.0</a></li>
+        <li><a href="#iheatmapr-0-3-0">0.3.0</a></li>
         <li><a href="#iheatmapr-0-2-1">0.2.1</a></li>
       </ul>
     </div>

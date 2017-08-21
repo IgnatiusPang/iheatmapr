@@ -23,9 +23,10 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -51,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../articles/iheatmapr.html">Vignette</a>
+  <a href="../articles/full_vignettes/iheatmapr.html">Vignette</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,7 +61,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/AliciaSchep/iheatmapr">
+  <a href="https://github.com/ropensci/iheatmapr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -80,15 +81,18 @@
     </div>
 
     
-    <p>iheatmap</p>
+    <p>Make a farily standard interactive heatmap with optional clustering and 
+row and column annotations.  For more flexibility and options, see the
+<code><a href='main_heatmap.html'>main_heatmap</a></code> function and other modular functions as described
+ in vignette.</p>
     
 
-    <pre><span class='co'># S4 method for matrix</span>
+    <pre class="usage"><span class='co'># S4 method for matrix</span>
 <span class='fu'>iheatmap</span>(<span class='no'>data</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>default_x</span>(<span class='no'>data</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>default_y</span>(<span class='no'>data</span>),
   <span class='kw'>cluster_rows</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"hclust"</span>, <span class='st'>"kmeans"</span>), <span class='kw'>cluster_cols</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>,
   <span class='st'>"hclust"</span>, <span class='st'>"kmeans"</span>), <span class='kw'>row_clusters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_clusters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>row_k</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_k</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_clust_dist</span> <span class='kw'>=</span> <span class='kw'>stats</span><span class='kw'>::</span><span class='no'>dist</span>,
-  <span class='kw'>col_clust_dist</span> <span class='kw'>=</span> <span class='kw'>stats</span><span class='kw'>::</span><span class='no'>dist</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Signal"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"rows"</span>,
+  <span class='kw'>row_k</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_k</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_clust_dist</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/stats/topics/dist'>dist</a></span>,
+  <span class='kw'>col_clust_dist</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/stats/topics/dist'>dist</a></span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Signal"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"rows"</span>,
   <span class='st'>"cols"</span>), <span class='kw'>scale_method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"standardize"</span>, <span class='st'>"center"</span>, <span class='st'>"normalize"</span>),
   <span class='kw'>colors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_clusters_colors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>col_clusters_name</span> <span class='kw'>=</span> <span class='st'>"Col&lt;br&gt;Clusters"</span>, <span class='kw'>row_clusters_colors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -97,7 +101,8 @@
   <span class='kw'>col_annotation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_annotation_colors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>col_annotation_colors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>row_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>row_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>colorbar_grid</span> <span class='kw'>=</span> <span class='fu'><a href='setup_colorbar_grid.html'>setup_colorbar_grid</a></span>(), <span class='kw'>font</span> <span class='kw'>=</span> <span class='fu'>list</span>(), <span class='no'>...</span>)</pre>
+  <span class='kw'>colorbar_grid</span> <span class='kw'>=</span> <span class='fu'><a href='setup_colorbar_grid.html'>setup_colorbar_grid</a></span>(), <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
+  <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"iheatmapr"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -232,8 +237,13 @@ heatmap</p></td>
 <code><a href='setup_colorbar_grid.html'>setup_colorbar_grid</a></code></p></td>
     </tr>
     <tr>
-      <th>font</th>
-      <td><p>list of font attributes</p></td>
+      <th>layout</th>
+      <td><p>list of layout attributes to pass to plotly, 
+eg. list(font = list(size = 15))</p></td>
+    </tr>
+    <tr>
+      <th>source</th>
+      <td><p>source name for use with shiny</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -243,13 +253,23 @@ heatmap</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>Iheatmap-class</code> object, which can be printed to generate 
+    <p><code><a href='Iheatmap-class.html'>Iheatmap-class</a></code> object, which can be printed to generate 
 an interactive graphic</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>By default, no scaling is done of rows or columns. This can be changed by 
+specifying the 'scale' argument.  There are three options for scaling 
+methods. "standardize" subtracts the mean and divides by standard deviation,
+"center" just subtracts the mean, and "normalize" divides by the sum of the 
+values.  "normalize" should only be used for data that is all positive!  If 
+alternative scaling is desired, the scaling should be done prior to calling 
+the iheatmap function.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code>iheatmap</code>, <code><a href='add_iheatmap.html'>add_iheatmap</a></code>, 
-<code><a href='as_plotly.html'>as_plotly</a></code></p>
+<code><a href='to_widget.html'>to_widget</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -263,7 +283,7 @@ an interactive graphic</p>
  <span class='kw'>row_annotation</span> <span class='kw'>=</span> <span class='no'>annotation</span>)
 
 <span class='co'># Print heatmap if interactive session </span>
-<span class='kw'>if</span> (<span class='fu'>interactive</span>()) <span class='no'>hm</span></div></pre>
+<span class='kw'>if</span> (<span class='fu'>interactive</span>()) <span class='no'>hm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: file("") only supports open = "w+" and open = "w+b": using the former</span></div><div class='output co'>#&gt; <span class='error'>Error in dirname(to): a character vector argument expected</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -271,6 +291,8 @@ an interactive graphic</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

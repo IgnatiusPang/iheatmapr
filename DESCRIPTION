@@ -1,20 +1,47 @@
 Package: iheatmapr
 Type: Package
-Title: Interactive Complex Heatmaps
-Version: 0.2.4
+Title: Interactive, Complex Heatmaps
+Version: 0.4.0
+Author: Alicia Schep, Sarah Kummerfeld 
 Authors@R: c(person("Alicia", "Schep", email = "aschep@gmail.com",
                   role = c("aut", "cre")),
               person("Sarah","Kummerfeld", email = "kummerfeld.sarah@gene.com",
                   role = c("aut")),
-              person("Genentech", role = "cph"))
-Description: iheatmapr is a package for making complex, interactive heatmaps.
-    The package includes a modular system for iteratively building up complex
-    heatmaps, as well as the iheatmap function for making relatively standard
-    heatmaps.
+              person("Genentech", role = "cph"),
+              person("Andee","Kaplan", role = "rev",
+                  comment = "Reviewer for rOpensci review process https://github.com/ropensci/onboarding/issues/107"),
+              person("Carl","Ganz", role = "rev",
+                  comment = "Reviewer for rOpensci review process https://github.com/ropensci/onboarding/issues/107"),    
+              person("Alex", "Johnson", role = "ctb",
+                  comment = "plotly.js library"),
+              person("Étienne ", "Tétreault-Pinard", role = "ctb",
+                  comment = "plotly.js library"),
+              person("Mikola", "Lysenko", role = "ctb",
+                  comment = "plotly.js library"),  
+              person("Ricky", "Reusser", role = "ctb",
+                  comment = "plotly.js library"),   
+              person("Robert", "Monfera", role = "ctb",
+                  comment = "plotly.js library"),    
+              person("Nicolas", "Riesco", role = "ctb",
+                  comment = "plotly.js library"),  
+              person("Miklós", "Tusz", role = "ctb",
+                  comment = "plotly.js library"),    
+              person("Chelsea", "Douglas", role = "ctb",
+                  comment = "plotly.js library"), 
+              person("Ben", "Postlethwaite", role = "ctb",
+                  comment = "plotly.js library"),   
+              person("Chris", "Parmer", role = "ctb",
+                  comment = "plotly.js library"),    
+              person("Alex", "Vados", role = "ctb",
+                  comment = "plotly.js library"), 
+              person("Plotly", role = "cph",
+                  comment = "plotly.js library"))
+Description: Make complex, interactive heatmaps. iheatmapr includes a modular 
+    system for iteratively building up complex heatmaps, as well as the iheatmap 
+    function for making relatively standard heatmaps.
 License: MIT + file LICENSE
 Depends:
-    plotly (>= 4.1.1),
-    R (>= 2.10)
+    R (>= 3.2.0)
 Imports:
     methods,
     plyr,
@@ -28,7 +55,8 @@ Imports:
     htmlwidgets,
     jsonlite,
     scales,
-    knitr
+    knitr,
+    tools
 Suggests:
     htmltools,
     datasets,
@@ -37,17 +65,18 @@ Suggests:
     rmarkdown,
     reshape2,
     roxygen2,
-    covr
+    covr,
+    webshot
 biocViews: Visualization
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
-URL: https://github.com/AliciaSchep/iheatmapr
-BugReports: https://github.com/AliciaSchep/iheatmapr/issues
+URL: https://github.com/ropensci/iheatmapr
+BugReports: https://github.com/ropensci/iheatmapr/issues
+Encoding: UTF-8
 Collate:
     'AllClasses.R'
     'AllGenerics.R'
     'annotations.R'
-    'as_plotly.R'
     'axes.R'
     'axis_labels.R'
     'axis_titles.R'
@@ -64,8 +93,10 @@ Collate:
     'iheatmap.R'
     'iheatmapr.R'
     'layout.R'
-    'shiny_click_test.R'
+    'shiny.R'
+    'shiny_test.R'
     'signal.R'
     'subplot.R'
     'summary.R'
+    'to_widget.R'
     'utils.R'

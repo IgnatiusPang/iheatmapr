@@ -1,6 +1,9 @@
-[![Build Status](https://travis-ci.org/AliciaSchep/iheatmapr.svg?branch=master)](https://travis-ci.org/AliciaSchep/iheatmapr)
-[![codecov](https://codecov.io/gh/AliciaSchep/iheatmapr/branch/master/graph/badge.svg?token=CTupoUlXNI)](https://codecov.io/gh/AliciaSchep/iheatmapr)
-
+[![Build Status](https://travis-ci.org/ropensci/iheatmapr.svg?branch=master)](https://travis-ci.org/ropensci/iheatmapr)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/iheatmapr?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/iheatmapr)
+[![codecov](https://codecov.io/gh/ropensci/iheatmapr/branch/master/graph/badge.svg?token=CTupoUlXNI)](https://codecov.io/gh/ropensci/iheatmapr)
+![R version](https://img.shields.io/badge/R%20%3E%3D-3.2.0-blue.svg)
+[![](https://badges.ropensci.org/107_status.svg)](https://github.com/ropensci/onboarding/issues/107)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.841331.svg)](https://doi.org/10.5281/zenodo.841331)
 
 # iheatmapr
 
@@ -13,7 +16,7 @@ While there are already plenty of awesome R packages for making heatmaps, includ
 iheatmapr is not yet on CRAN -- install using devtools:
 
 ```r
-devtools::install_github("AliciaSchep/iheatmapr")
+devtools::install_github("ropensci/iheatmapr")
 ```
 
 iheatmapr has a Bioconductor dependency, so if you have never installed a package from Bioconductor before you will need to install BiocInstaller first:
@@ -27,7 +30,7 @@ biocLite("BiocInstaller")
 
 As an example of a complex heatmap, we can make a version of the famous vaccines plot from the Wall Street Journal that has been recreated in several other heatmap frameworks in R. 
 
-![](https://raw.githubusercontent.com/AliciaSchep/iheatmapr/master/vaccine.gif)
+![](https://raw.githubusercontent.com/ropensci/iheatmapr/master/vaccine.gif)
 
 The code to create this heatmap is:
 
@@ -36,7 +39,7 @@ library(iheatmapr)
 data(measles, package = "iheatmapr")
 
 main_heatmap(measles, name = "Measles<br>Cases", x_categorical = FALSE,
-             font = list(size = 8)) %>%
+             layout = list(font = list(size = 8))) %>%
   add_col_groups(ifelse(1930:2001 < 1961,"No","Yes"),
                   side = "bottom", name = "Vaccine<br>Introduced?",
                   title = "Vaccine?",
@@ -61,4 +64,10 @@ Hovering over the heatmaps yields a tooltip with the name of the row and column 
 
 # Documentation
 
-See the [vignette](https://aliciaschep.github.io/iheatmapr/articles/iheatmapr.html) for a more thorough introduction to the package.
+See the [vignette](https://ropensci.github.io/iheatmapr/articles/full_vignettes/iheatmapr.html) for a more thorough introduction to the package.
+
+# Acknowledgements
+
+This package includes the open source Plotly.js library, which does much of the work of making these interactive plots possible! In creating this package, I also drew inspiration & some code from the great plotly R package; in particular, the code for the iheatmapr htmlwidget is adapted from an earlier version of the plotly R package. Additionally, numerous people at Genentech helped provide feedback and guidance for this project, including but not limited to Justin Finkle, August Guang, Michael Lawrence, Gabe Becker, Steve Lianoglou, Pete Haverty... thanks to all who helped review code and/or provide feedback!  This package also went through the on-boarding process for rOpensci -- thanks to the reviewers Carl Ganz and Andee Kaplan and editor Maëlle Salmon for all their helpful feedback! 
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

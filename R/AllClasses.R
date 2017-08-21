@@ -17,6 +17,18 @@ setClass("IheatmapPanel",
 setClass("IheatmapPanels",
          contains = "VIRTUAL")
 
+## Tooltip options classs
+setClass("HeatmapTooltipOptions",
+         slots = c(
+           row = "logical",
+           col = "logical",
+           value = "logical",
+           prepend_row = "character",
+           prepend_col = "character",
+           prepend_value = "character"
+         ))
+
+
 ## IheatmapPlot Class and children ---------------------------------------------
 
 #' IheatmapPlot
@@ -55,6 +67,8 @@ setClass("IheatmapPlot",
 #' @author Alicia Schep
 setClass("MainHeatmap",
          slots = list(data = "matrix",
+                      text = "matrix",
+                      tooltip = "HeatmapTooltipOptions",
                       colorbar = "character",
                       show_colorbar = "logical"),
          contains = "IheatmapPlot")
@@ -74,6 +88,8 @@ setClass("MainHeatmap",
 #' @author Alicia Schep
 setClass("RowAnnotation",
          slots = list(data = "vector",
+                      text = "vector",
+                      tooltip = "HeatmapTooltipOptions",
                       title = "character",
                       colorbar = "character",
                       show_colorbar = "logical"),
@@ -94,6 +110,8 @@ setClass("RowAnnotation",
 #' @author Alicia Schep
 setClass("ColumnAnnotation",
          slots = list(data = "vector",
+                      text = "vector",
+                      tooltip = "HeatmapTooltipOptions",
                       title = "character",
                       colorbar = "character",
                       show_colorbar = "logical"),
@@ -591,6 +609,7 @@ setValidity("IheatmapAxes",
 #' @slot current_xaxis name of current x axis 
 #' @slot current_yaxis name of current y axis 
 #' @slot layout list of plotly layout parameters 
+#' @slot source source name, for use with shiny
 #' @details This is a virtual class with two children classes, 
 #'  IheatmapHorizontal and IheatmapVertical. For IheatmapHorizontal additional
 #'  main heatmaps are added horizontally, and for IheatmapVertical additional
@@ -604,15 +623,17 @@ setValidity("IheatmapAxes",
 #' @author Alicia Schep
 setClass("Iheatmap",
          slots = list(plots = "IheatmapPlots",
-                               shapes = "IheatmapShapes",
-                               annotations = "IheatmapAnnotations",
-                               xaxes = "IheatmapAxes",
-                               yaxes = "IheatmapAxes",
-                               colorbars = "IheatmapColorbars",
-                               colorbar_grid = "IheatmapColorbarGrid",
-                               current_xaxis = "character",
-                               current_yaxis = "character",
-                               layout = "list"),
+                      shapes = "IheatmapShapes",
+                      annotations = "IheatmapAnnotations",
+                      xaxes = "IheatmapAxes",
+                      yaxes = "IheatmapAxes",
+                      colorbars = "IheatmapColorbars",
+                      colorbar_grid = "IheatmapColorbarGrid",
+                      current_xaxis = "character",
+                      current_yaxis = "character",
+                      layout = "list",
+                      source = "character"
+         ),
          contains = "VIRTUAL")
 
 setValidity("Iheatmap",
@@ -633,3 +654,4 @@ setClass("IheatmapHorizontal",
 
 setClass("IheatmapVertical",
          contains = "Iheatmap")
+

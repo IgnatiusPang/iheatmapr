@@ -1,5 +1,9 @@
 #' iheatmap
 #' 
+#' Make a farily standard interactive heatmap with optional clustering and 
+#' row and column annotations.  For more flexibility and options, see the
+#' \code{\link{main_heatmap}} function and other modular functions as described
+#'  in vignette.
 #' @param data matrix of values to be plotted as heatmap
 #' @param x x xaxis labels, by default colnames of data
 #' @param y y axis labels, by default rownames of data
@@ -35,19 +39,29 @@
 #' @param row_annotation_colors list of colors for row annotations heatmap
 #' @param colorbar_grid colorbar grid parameters, should be result from 
 #' \code{\link{setup_colorbar_grid}} 
-#' @param font list of font attributes
+#' @param layout list of layout attributes to pass to plotly, 
+#' eg. list(font = list(size = 15))
 #' @param row_labels axis labels for y axis 
 #' @param col_labels axis labels for x axis 
 #' @param row_title x axis title
 #' @param col_title y axis title
+#' @param source source name for use with shiny
 #' @param ... additional argument to iheatmap
+#' @details 
+#' By default, no scaling is done of rows or columns. This can be changed by 
+#' specifying the 'scale' argument.  There are three options for scaling 
+#' methods. "standardize" subtracts the mean and divides by standard deviation,
+#' "center" just subtracts the mean, and "normalize" divides by the sum of the 
+#' values.  "normalize" should only be used for data that is all positive!  If 
+#' alternative scaling is desired, the scaling should be done prior to calling 
+#' the iheatmap function.
 #' @return \code{\link{Iheatmap-class}} object, which can be printed to generate 
 #' an interactive graphic
 #' @export
 #' @author Alicia Schep
 #' 
 #' @seealso \code{\link{iheatmap}}, \code{\link{add_iheatmap}}, 
-#' \code{\link{as_plotly}}
+#' \code{\link{to_widget}}
 #' @include main_heatmap.R
 #' @rdname iheatmap
 #' @name iheatmap
@@ -95,7 +109,8 @@ setMethod("iheatmap", c(data = "matrix"),
                    row_title = NULL,
                    col_title = NULL,
                    colorbar_grid = setup_colorbar_grid(),
-                   font = list(),
+                   layout = list(),
+                   source = "iheatmapr",
                    ...){
             
             cluster_rows <- match.arg(cluster_rows)
@@ -119,7 +134,8 @@ setMethod("iheatmap", c(data = "matrix"),
                           name = name, 
                           colors = colors,
                           colorbar_grid = colorbar_grid,
-                          font = font,
+                          layout = layout,
+                          source = source,
                           ...) 
             
             if (cluster_rows != "none"){
@@ -161,24 +177,24 @@ setMethod("iheatmap", c(data = "matrix"),
             
             if (!is.null(row_labels)){
               if (isTRUE(row_labels)){
-                p <- add_row_labels(p, font = font, side = "right")
+                p <- add_row_labels(p, side = "right")
               } else if (row_labels) {
-                p <- add_row_labels(p, ticktext = row_labels, font = font, 
+                p <- add_row_labels(p, ticktext = row_labels, 
                                           side = "right")
               }
             }
             if (!is.null(col_labels)){
               if (isTRUE(col_labels)){
-                p <- add_col_labels(p, font = font)
+                p <- add_col_labels(p)
               } else if (col_labels) {
-                p <- add_col_labels(p, ticktext = col_labels, font = font)
+                p <- add_col_labels(p, ticktext = col_labels)
               }
             }
             if (!is.null(col_title)){
-              p <- add_col_title(p, col_title, font = font)
+              p <- add_col_title(p, col_title)
             }
             if (!is.null(row_title)){
-              p <- add_row_title(p, row_title, side = "left", font = font)
+              p <- add_row_title(p, row_title, side = "left")
             }
             validObject(p)
             p
@@ -219,7 +235,6 @@ setMethod("iheatmap", c(data = "matrix"),
 #' @param show_col_clusters_colorbar show the colorbar for column clusters?
 #' @param col_annotation_colors list of colors for col annotations heatmap
 #' @param row_annotation_colors list of colors for row annotations heatmap
-#' @param font list of font attributes
 #' @param row_labels axis labels for y axis 
 #' @param col_labels axis labels for x axis 
 #' @param row_title x axis title
@@ -228,6 +243,14 @@ setMethod("iheatmap", c(data = "matrix"),
 #' size of first heatmap
 #' @param ... additional argument to add_iheatmap
 #' @export
+#' @details 
+#' By default, no scaling is done of rows or columns. This can be changed by 
+#' specifying the 'scale' argument.  There are three options for scaling 
+#' methods. "standardize" subtracts the mean and divides by standard deviation,
+#' "center" just subtracts the mean, and "normalize" divides by the sum of the 
+#' values.  "normalize" should only be used for data that is all positive!  If 
+#' alternative scaling is desired, the scaling should be done prior to calling 
+#' the iheatmap function.
 #' @author Alicia Schep
 #' @rdname add_iheatmap
 #' @name add_iheatmap
@@ -235,8 +258,7 @@ setMethod("iheatmap", c(data = "matrix"),
 #' an interactive graphic
 #' @aliases add_iheatmap,IheatmapHorizontal,matrix-method 
 #' add_iheatmap,IheatmapVertical,matrix-method
-#' @seealso \code{\link{iheatmap}}, \code{\link{main_heatmap}}, 
-#' \code{\link{as_plotly}}
+#' @seealso \code{\link{iheatmap}}, \code{\link{main_heatmap}}
 #' @examples 
 #' 
 #' mat <- matrix(rnorm(24), nrow = 6)
@@ -278,7 +300,6 @@ setMethod("add_iheatmap", c(p = "IheatmapHorizontal", data = "matrix"),
                    row_title = NULL,
                    col_title = NULL,
                    buffer = 0.2,
-                   font = list(),
                    ...){
             
             
@@ -328,24 +349,24 @@ setMethod("add_iheatmap", c(p = "IheatmapHorizontal", data = "matrix"),
             
             if (!is.null(row_labels)){
               if (isTRUE(row_labels)){
-                p <- add_row_labels(p, font = font, side = "right")
+                p <- add_row_labels(p, side = "right")
               } else if (row_labels) {
-                p <- add_row_labels(p, ticktext = row_labels, font = font, 
+                p <- add_row_labels(p, ticktext = row_labels,
                                           side = "right")
               }
             }
             if (!is.null(col_labels)){
               if (isTRUE(col_labels)){
-                p <- add_col_labels(p, font = font)
+                p <- add_col_labels(p)
               } else if (col_labels) {
-                p <- add_col_labels(p, ticktext = col_labels, font = font)
+                p <- add_col_labels(p, ticktext = col_labels)
               }
             }
             if (!is.null(col_title)){
-              p <- add_col_title(p, col_title, font = font)
+              p <- add_col_title(p, col_title)
             }
             if (!is.null(row_title)){
-              p <- add_row_title(p, row_title, side = "left", font = font)
+              p <- add_row_title(p, row_title, side = "left")
             }  
             validObject(p)
             p
@@ -376,7 +397,6 @@ setMethod("add_iheatmap", c(p = "IheatmapVertical", data = "matrix"),
                    row_title = NULL,
                    col_title = NULL,
                    buffer = 0.2,
-                   font = list(),
                    ...){
             
             
@@ -426,24 +446,24 @@ setMethod("add_iheatmap", c(p = "IheatmapVertical", data = "matrix"),
             
             if (!is.null(row_labels)){
               if (isTRUE(row_labels)){
-                p <- add_row_labels(p, font = font, side = "right")
+                p <- add_row_labels(p, side = "right")
               } else if (row_labels) {
-                p <- add_row_labels(p, ticktext = row_labels, font = font, 
+                p <- add_row_labels(p, ticktext = row_labels, 
                                           side = "right")
               }
             }
             if (!is.null(col_labels)){
               if (isTRUE(col_labels)){
-                p <- add_col_labels(p, font = font)
+                p <- add_col_labels(p)
               } else if (col_labels) {
-                p <- add_col_labels(p, ticktext = col_labels, font = font)
+                p <- add_col_labels(p, ticktext = col_labels)
               }
             }
             if (!is.null(col_title)){
-              p <- add_col_title(p, col_title, font = font)
+              p <- add_col_title(p, col_title)
             }
             if (!is.null(row_title)){
-              p <- add_row_title(p, row_title, side = "left", font = font)
+              p <- add_row_title(p, row_title, side = "left")
             }  
             validObject(p)
             p

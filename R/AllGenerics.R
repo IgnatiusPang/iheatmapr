@@ -55,7 +55,9 @@ setGeneric("add_annotation",
 ### Adding New Sub-plots ------------------------------------------------------
 ### Documented in method defintions
 
+
 setGeneric("iheatmap", function(data, ...) standardGeneric("iheatmap"))
+
 
 setGeneric("add_iheatmap", 
            function(p, data, ...) standardGeneric("add_iheatmap"))
@@ -196,7 +198,10 @@ setGeneric("make_colorbar", function(cb, grid) standardGeneric("make_colorbar"))
 
 setGeneric("get_layout", function(x, ...) standardGeneric("get_layout"))
 
-setGeneric("as_plotly", function(p, ...) standardGeneric("as_plotly"))
+setGeneric("modify_layout", function(x, ...) standardGeneric("modify_layout"))
+
+#' @export
+setGeneric("to_widget", function(p, ...) standardGeneric("to_widget"))
 
 setGeneric("save_iheatmap", 
            function(p, filename, ...) standardGeneric("save_iheatmap"))

@@ -18,7 +18,7 @@
   row_annotation = NULL, col_annotation = NULL,
   row_annotation_colors = NULL, col_annotation_colors = NULL,
   row_labels = NULL, col_labels = NULL, row_title = NULL,
-  col_title = NULL, buffer = 0.2, font = list(), ...)
+  col_title = NULL, buffer = 0.2, ...)
 
 \S4method{add_iheatmap}{IheatmapVertical,matrix}(p, data, y = default_y(data),
   cluster_rows = c("none", "hclust", "kmeans", "groups"),
@@ -29,7 +29,7 @@
   show_row_clusters_colorbar = TRUE, row_annotation = NULL,
   col_annotation = NULL, row_annotation_colors = NULL,
   col_annotation_colors = NULL, row_labels = NULL, col_labels = NULL,
-  row_title = NULL, col_title = NULL, buffer = 0.2, font = list(), ...)
+  row_title = NULL, col_title = NULL, buffer = 0.2, ...)
 }
 \arguments{
 \item{p}{iheatmap object}
@@ -83,8 +83,6 @@ center, normalize}
 \item{buffer}{amount of space to leave empty before this plot, relative to 
 size of first heatmap}
 
-\item{font}{list of font attributes}
-
 \item{...}{additional argument to add_iheatmap}
 
 \item{y}{y axis labels, by default rownames of data}
@@ -113,6 +111,15 @@ an interactive graphic
 \description{
 add_iheatmap
 }
+\details{
+By default, no scaling is done of rows or columns. This can be changed by 
+specifying the 'scale' argument.  There are three options for scaling 
+methods. "standardize" subtracts the mean and divides by standard deviation,
+"center" just subtracts the mean, and "normalize" divides by the sum of the 
+values.  "normalize" should only be used for data that is all positive!  If 
+alternative scaling is desired, the scaling should be done prior to calling 
+the iheatmap function.
+}
 \examples{
 
 mat <- matrix(rnorm(24), nrow = 6)
@@ -132,8 +139,7 @@ add_iheatmap(mat2,
 if (interactive()) hm 
 }
 \seealso{
-\code{\link{iheatmap}}, \code{\link{main_heatmap}}, 
-\code{\link{as_plotly}}
+\code{\link{iheatmap}}, \code{\link{main_heatmap}}
 }
 \author{
 Alicia Schep

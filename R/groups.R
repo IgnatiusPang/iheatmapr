@@ -16,12 +16,12 @@
 #' @param size relative size of dendrogram (relative to the main heatmap)
 #' @param buffer amount of space to leave empty before this plot, relative to 
 #' size of first heatmap
+#' @param tooltip tooltip options, see \code{\link{setup_tooltip_options}}
 #' @param xname internal name of xaxis
 #' @param yname internal name of yaxis
 #' @param pname internal name of plot
 #' 
-#' @seealso \code{\link{iheatmap}}, \code{\link{as_plotly}}, 
-#' \code{\link{add_col_groups}}
+#' @seealso \code{\link{iheatmap}}, \code{\link{add_col_groups}}
 #' @return \code{\link{Iheatmap-class}} object, which can be printed to generate 
 #' an interactive graphic
 #' @rdname add_row_groups
@@ -52,6 +52,7 @@ setMethod(add_row_groups,
                    layout = list(),
                    size = 0.05,
                    buffer = 0.005,
+                   tooltip = setup_tooltip_options(),
                    xname = NULL,
                    yname = current_yaxis(p),
                    pname = name){
@@ -69,7 +70,9 @@ setMethod(add_row_groups,
                             colorbar = name,
                             show_colorbar = show_colorbar,
                             data = groups,
-                            title = title)
+                            title = title,
+                            text = groups,
+                            tooltip = tooltip)
             
             color_levels <- levels(as.factor(groups))
             new_colorbar <- 
@@ -115,12 +118,12 @@ setMethod(add_row_groups,
 #' @param size relative size of dendrogram (relative to the main heatmap)
 #' @param buffer amount of space to leave empty before this plot, relative to 
 #' size of first heatmap
+#' @param tooltip tooltip options, see \code{\link{setup_tooltip_options}}
 #' @param xname internal name of xaxis
 #' @param yname internal name of yaxis
 #' @param pname internal name of plot
 #' 
-#' @seealso \code{\link{iheatmap}}, \code{\link{as_plotly}}, 
-#' \code{\link{add_row_groups}}
+#' @seealso \code{\link{iheatmap}}, \code{\link{add_row_groups}}
 #' @return \code{\link{Iheatmap-class}} object, which can be printed to generate 
 #' an interactive graphic
 #' @export
@@ -150,6 +153,7 @@ setMethod(add_col_groups,
                    layout = list(),
                    size = 0.05,
                    buffer = 0.015,
+                   tooltip = setup_tooltip_options(),
                    xname = current_xaxis(p),
                    yname = NULL,
                    pname = name){
@@ -167,7 +171,9 @@ setMethod(add_col_groups,
                             colorbar = name,
                             show_colorbar = show_colorbar,
                             data = groups,
-                            title = title)
+                            title = title,
+                            text = groups,
+                            tooltip = tooltip)
             
             color_levels <- levels(as.factor(groups))
             new_colorbar <- 
